@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, AsyncTaskActivity.class));
                 break;
             case R.id.button2:
-
+                startActivity(new Intent(this, ThreadPoolActivity.class));
                 break;
             default:
                 break;
