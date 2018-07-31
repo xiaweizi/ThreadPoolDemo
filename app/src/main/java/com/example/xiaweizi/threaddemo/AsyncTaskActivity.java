@@ -13,7 +13,8 @@ public class AsyncTaskActivity extends AppCompatActivity {
 
     private static final String TAG = "AsyncTask::";
     private TextView mTvContent;
-    private DownLoadFilesTask downLoadFilesTask;
+    private CalculateSizeTask calculateSizeTask;
+    private static final String[] DATA = new String[]{"1234", "123456789", "1", "12", "123456789", "123", "123456"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,20 +26,20 @@ public class AsyncTaskActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.start:
-                downLoadFilesTask = new DownLoadFilesTask(this);
-                downLoadFilesTask.execute("1234", "123456789", "1", "12", "123456789", "123", "123456");
+                calculateSizeTask = new CalculateSizeTask(this);
+                calculateSizeTask.execute(DATA);
                 break;
             case R.id.cancel:
-                downLoadFilesTask.cancel(false);
+                calculateSizeTask.cancel(false);
                 break;
         }
     }
 
-    static class DownLoadFilesTask extends AsyncTask<String, Float, Long> {
+    static class CalculateSizeTask extends AsyncTask<String, Float, Long> {
 
         WeakReference<AsyncTaskActivity> mActivity;
 
-        DownLoadFilesTask(AsyncTaskActivity activity) {
+        CalculateSizeTask(AsyncTaskActivity activity) {
             mActivity = new WeakReference<>(activity);
         }
 
