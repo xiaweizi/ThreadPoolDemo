@@ -32,7 +32,7 @@
         android:onClick="threadPool"
         android:text="scheduled"
         android:textAllCaps="false"
-        app:layout_constraintTop_toBottomOf="@+id/fixed"/>
+        app:layout_constraintTop_toBottomOf="@+id/fixed" />
 
     <Button
         android:id="@+id/cached"
@@ -42,24 +42,24 @@
         android:text="cached"
         android:textAllCaps="false"
         app:layout_constraintLeft_toLeftOf="@id/single"
-        app:layout_constraintTop_toBottomOf="@+id/fixed"/>
+        app:layout_constraintTop_toBottomOf="@+id/fixed" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_marginBottom="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginBottom="50dp"
         app:layout_constraintRight_toRightOf="parent">
 
         <TextView
-            android:layout_gravity="center_horizontal"
             android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:padding="3dp"
             android:textSize="14sp"
-            tools:text="gaga"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            tools:text="gaga" />
     </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
