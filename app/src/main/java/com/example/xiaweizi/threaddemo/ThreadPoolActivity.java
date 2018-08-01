@@ -9,9 +9,7 @@ import android.widget.TextView;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class ThreadPoolActivity extends AppCompatActivity {
@@ -30,9 +28,7 @@ public class ThreadPoolActivity extends AppCompatActivity {
     }
 
     private void fixedThreadPool() {
-        ExecutorService executorService = new ThreadPoolExecutor(1, 5,
-                0L, TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<Runnable>(5));
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
         for (int i = 0; i < 10; i++) {
             executorService.execute(getRunnable());
         }
@@ -48,12 +44,13 @@ public class ThreadPoolActivity extends AppCompatActivity {
     private void scheduledThreadPool() {
         ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
 //        scheduledExecutorService.schedule(getRunnable(), 1, TimeUnit.SECONDS);
-        scheduledExecutorService.scheduleAtFixedRate(getRunnable(), 1, 1, TimeUnit.SECONDS);
+//        scheduledExecutorService.scheduleAtFixedRate(getRunnable(), 1, 1, TimeUnit.SECONDS);
+        scheduledExecutorService.scheduleWithFixedDelay(getRunnable(), 1, 1, TimeUnit.SECONDS);
     }
 
     private void cacheThreadPool() {
         ExecutorService executorService = Executors.newCachedThreadPool();
-        for (int i = 0; i < 120; i++) {
+        for (int i = 0; i < 50; i++) {
             executorService.execute(getRunnable());
         }
     }
@@ -64,11 +61,11 @@ public class ThreadPoolActivity extends AppCompatActivity {
             public void run() {
                 sb.append(Thread.currentThread().getName()).append("\n");
                 printLog();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    Thread.sleep(1);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
             }
         };
     }
