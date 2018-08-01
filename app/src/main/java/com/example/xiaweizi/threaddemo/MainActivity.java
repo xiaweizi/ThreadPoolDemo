@@ -21,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.button2:
                 startActivity(new Intent(this, ThreadPoolActivity.class));
                 break;
+            case R.id.button3:
+                startService(new Intent(this, MyIntentService.class));
+                break;
             default:
                 break;
         }

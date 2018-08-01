@@ -15,6 +15,7 @@ public class AsyncTaskActivity extends AppCompatActivity {
     private TextView mTvContent;
     private CalculateSizeTask calculateSizeTask;
     private static final String[] DATA = new String[]{"1234", "123456789", "1", "12", "123456789", "123", "123456"};
+    private String curThreadName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +46,17 @@ public class AsyncTaskActivity extends AppCompatActivity {
 
         @Override
         protected Long doInBackground(String... urls) {
-            Log.i(TAG, "doInBackground: " + Thread.currentThread().getName());
+            AsyncTaskActivity theActivity = mActivity.get();
+            if (theActivity == null || theActivity.isFinishing()) {
+                return 0L;
+            }
+            theActivity.curThreadName = Thread.currentThread().getName();
             int length = urls.length;
             long totalSize = 0;
             for (int i = 0; i < length; i++) {
                 publishProgress(i * 1.0f / length);
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(300);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -87,7 +92,7 @@ public class AsyncTaskActivity extends AppCompatActivity {
             if (theActivity == null || theActivity.isFinishing()) {
                 return;
             }
-            theActivity.mTvContent.setText(content);
+            theActivity.mTvContent.setText(theActivity.curThreadName + "\n" + content);
         }
     }
 }
